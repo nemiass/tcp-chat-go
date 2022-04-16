@@ -28,7 +28,6 @@ func main() {
 	}()
 
 	if err != nil {
-		fmt.Println("Error 1:")
 		fmt.Println(err)
 		return
 	}
@@ -38,13 +37,11 @@ func main() {
 	for {
 		client, err := listener.Accept()
 		if err != nil {
-			fmt.Println("Error 2:")
 			fmt.Println(err)
 			continue
 		}
 		err = gob.NewDecoder(client).Decode(&username)
 		if err != nil {
-			fmt.Println("Error 3:")
 			fmt.Println(err)
 			client.Close()
 			continue
@@ -53,7 +50,6 @@ func main() {
 		if _, ok := users[username]; ok {
 			err = gob.NewEncoder(client).Encode(username + " ya existe!")
 			if err != nil {
-				fmt.Println("Error 4:")
 				fmt.Println(err)
 			}
 			client.Close()
